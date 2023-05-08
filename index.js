@@ -11,15 +11,7 @@ const {
   addDepartment,
 } = require("./scripts/inquirer");
 
-const questions = [
-  "What Would You Like to Do?",
-  "Please Specify New Employee Name",
-  "Please Specify Employee Name",
-  "Which Department Does This Role Belong To?",
-  "Please Specify New Department",
-];
-
-const [menu, addNewDepartment] = questions;
+const menu = "What would you like to do?";
 
 const employeeNewName = [
   "What is the Employee's First Name?",
@@ -54,6 +46,16 @@ const createRole = [
 ];
 
 const [addNewRole, addNewSalary, whichDepartment] = createRole;
+
+const updateARole = [
+  "What is the Updated Title of the Role?",
+  "What is the Updated Salary of the Role?",
+  "Which Department Does This Role Belong To?",
+];
+
+const [updatedRole, updateSalary, updateDepartment] = updateARole;
+
+const newDepartment = ["What is the Name of the New Department?"];
 
 function init() {
   console.log(
@@ -92,6 +94,7 @@ function cmsMenu() {
           "Update Employee",
           "View All Roles",
           "Add Role",
+          "Update Role",
           "View All Departments",
           "Add Department",
           "Quit",
@@ -169,26 +172,27 @@ function cmsMenu() {
           viewRoles();
           return;
         case "Add Role":
+        case "Update Role":
           inquirer
             .prompt([
               {
                 type: "input",
-                message: addNewRole,
+                message: updatedRole,
                 name: "newRole",
               },
               {
                 type: "input",
-                message: addNewSalary,
+                message: updateSalary,
                 name: "newSalary",
               },
               {
                 type: "input",
-                message: whichDepartment,
+                message: updateDepartment,
                 name: "chooseDepartment",
               },
             ])
             .then((data) => {
-              addRole(data);
+              updateRole(data);
             });
           return;
         case "View All Departments":
@@ -199,7 +203,7 @@ function cmsMenu() {
             .prompt([
               {
                 type: "input",
-                message: addNewDepartment,
+                message: newDepartment,
                 name: "newDepartment",
               },
             ])
