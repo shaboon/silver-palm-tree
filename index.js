@@ -9,9 +9,7 @@ const {
   updateRole,
   viewDepartments,
   addDepartment,
-} = require("./scripts/inquirer");
-
-const menu = "What would you like to do?";
+} = require("./scripts/operations.js");
 
 const employeeNewName = [
   "What is the Employee's First Name?",
@@ -86,7 +84,7 @@ function cmsMenu() {
     .prompt([
       {
         type: "list",
-        message: menu,
+        message: "What would you like to do?",
         name: "menu",
         choices: [
           "View All Employees",
@@ -102,8 +100,7 @@ function cmsMenu() {
       },
     ])
     .then((data) => {
-      const menu = data.menu;
-      switch (menu) {
+      switch (data.menu) {
         case "View All Employees":
           viewAllEmployees();
           return;
@@ -172,6 +169,8 @@ function cmsMenu() {
           viewRoles();
           return;
         case "Add Role":
+          addRole();
+          return;
         case "Update Role":
           inquirer
             .prompt([
@@ -212,7 +211,8 @@ function cmsMenu() {
             });
           return;
         default:
-          return console.log("Quitting");
+          console.log("Quitting");
+          return process.exit(0);
       }
     });
 }

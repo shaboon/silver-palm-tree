@@ -1,5 +1,4 @@
 const connection = require("../db/connection");
-// const mysql = require("mysql2");
 
 function viewAllEmployees() {
   connection.query(
@@ -17,8 +16,8 @@ function viewAllEmployees() {
     LEFT JOIN department ON role.department_id = department.id
     LEFT JOIN employee manager ON employee.manager_id = manager.id;`,
     function (err, res) {
+      console.log("\n");
       console.table(res);
-      console.log(`Employees Shown`);
     }
   );
 }
