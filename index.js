@@ -39,6 +39,22 @@ const employeeNewName = [
 const [employeeFirstName, employeeLastName, employeeManager, employeeNewRole] =
   employeeNewName;
 
+const employeeUpdate = [
+  "Which Employee Would You Like to Update?",
+  "What is the Employee's Updated First Name?",
+  "What is the Employee's Updated Last Name?",
+  "Who is the Employee's Updated Manager ID?",
+  "Please Specify New Employee Role",
+];
+
+const [
+  employeeID,
+  employeeFName,
+  employeeLName,
+  employeeBoss,
+  employeeRoleNow,
+] = employeeUpdate;
+
 function init() {
   console.log(
     `
@@ -70,7 +86,7 @@ function init() {
         choices: [
           "View All Employees",
           "Add Employee",
-          "Update Employee Role",
+          "Update Employee",
           "View All Roles",
           "Add Role",
           "View All Departments",
@@ -100,26 +116,46 @@ function init() {
               },
               {
                 type: "input",
-                message: employeeManager,
-                name: "employeeManager",
+                message: employeeNewRole,
+                name: "employeeRole",
               },
               {
                 type: "input",
-                message: employeeNewRole,
-                name: "employeeRole",
+                message: employeeManager,
+                name: "employeeManager",
               },
             ])
             .then((data) => {
               addEmployee(data);
             });
           return;
-        case "Update Employee Role":
+        case "Update Employee":
           inquirer
             .prompt([
               {
                 type: "input",
-                message: newEmployeeName,
-                name: "newEmployee",
+                message: employeeID,
+                name: "id",
+              },
+              {
+                type: "input",
+                message: employeeFName,
+                name: "firstname",
+              },
+              {
+                type: "input",
+                message: employeeLName,
+                name: "lastname",
+              },
+              {
+                type: "input",
+                message: employeeBoss,
+                name: "manager",
+              },
+              {
+                type: "input",
+                message: employeeRoleNow,
+                name: "role",
               },
             ])
             .then((data) => {
@@ -167,6 +203,7 @@ function init() {
           return;
         case "View All Departments":
           viewDepartments();
+          return;
         case "Add Department":
           inquirer
             .prompt([
