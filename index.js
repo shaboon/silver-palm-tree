@@ -1,10 +1,20 @@
-// const inquirer = require("inquirer");
+const inquirer = require("inquirer");
+
+const {
+  viewAllEmployees,
+  addEmployee,
+  updateEmployee,
+  viewRoles,
+  addRole,
+  updateRole,
+  viewDepartments,
+  addDepartment,
+} = require("./scripts/inquirer");
 
 const questions = [
   "What Would You Like to Do?",
   "Please Specify New Employee Name",
   "Please Specify Employee Name",
-  "Please Specify Employee Role",
   "Which Department Does This Role Belong To?",
   "Please Specify New Department",
 ];
@@ -14,10 +24,20 @@ const [
   newEmployeeName,
   employeeName,
   employeeRole,
-  addRole,
+  addNewRole,
   whichDepartment,
-  addDepartment,
+  addNewDepartment,
 ] = questions;
+
+const employeeNewName = [
+  "What is the Employee's First Name?",
+  "What is the Employee's Last Name?",
+  "Who is the Employee's Manager ID?",
+  "Please Specify Employee Role",
+];
+
+const [employeeFirstName, employeeLastName, employeeManager, employeeNewRole] =
+  employeeNewName;
 
 function init() {
   console.log(
@@ -34,11 +54,11 @@ function init() {
         |   |  |/  | ___ _ _ __   ___ _  __ _  ___ _ __        |
         |   | ||/| |/  _| |  _ | /  _  |/ _  |/ _ |  __|       |
         |   | |  | |  (_) | | | |  (_) | (_) |  __/ |          |
-        |   |_|  |_||__,__|_| |_||__,__||__, ||___|_|          |
+        |   |_|  |_|.__,__|_| |_|.__,__||__, |.___|_|          |
         |                               |____/                 |
         |                                                      |
         '======================================================'
-        `
+    `
   );
 
   inquirer
@@ -63,8 +83,37 @@ function init() {
       const menu = data.menu;
       switch (menu) {
         case "View All Employees":
-          console.log(``);
+          viewAllEmployees();
+          return;
         case "Add Employee":
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                message: employeeFirstName,
+                name: "firstName",
+              },
+              {
+                type: "input",
+                message: employeeLastName,
+                name: "lastName",
+              },
+              {
+                type: "input",
+                message: employeeManager,
+                name: "employeeManager",
+              },
+              {
+                type: "input",
+                message: employeeNewRole,
+                name: "employeeRole",
+              },
+            ])
+            .then((data) => {
+              addEmployee(data);
+            });
+          return;
+        case "Update Employee Role":
           inquirer
             .prompt([
               {
@@ -74,8 +123,9 @@ function init() {
               },
             ])
             .then((data) => {
-              addEmployee(data);
+              updateEmployee(data);
             });
+          return;
         case "Update Employee Role":
           inquirer
             .prompt([
@@ -93,14 +143,16 @@ function init() {
             .then((data) => {
               updateRole(data);
             });
+          return;
         case "View All Roles":
-          console.log(``);
+          viewRoles();
+          return;
         case "Add Role":
           inquirer
             .prompt([
               {
                 type: "input",
-                message: addRole,
+                message: addNewRole,
                 name: "newRole",
               },
               {
@@ -112,22 +164,24 @@ function init() {
             .then((data) => {
               addRole(data);
             });
+          return;
         case "View All Departments":
-          console.log(``);
+          viewDepartments();
         case "Add Department":
           inquirer
             .prompt([
               {
                 type: "input",
-                message: addDepartment,
+                message: addNewDepartment,
                 name: "newDepartment",
               },
             ])
             .then((data) => {
               addDepartment(data);
             });
+          return;
         default:
-          return "";
+          return console.log("Quitting");
       }
     });
 }
