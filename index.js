@@ -19,15 +19,7 @@ const questions = [
   "Please Specify New Department",
 ];
 
-const [
-  menu,
-  newEmployeeName,
-  employeeName,
-  employeeRole,
-  addNewRole,
-  whichDepartment,
-  addNewDepartment,
-] = questions;
+const [menu, addNewDepartment] = questions;
 
 const employeeNewName = [
   "What is the Employee's First Name?",
@@ -55,6 +47,14 @@ const [
   employeeRoleNow,
 ] = employeeUpdate;
 
+const createRole = [
+  "What is the Title of the New Role?",
+  "What is the Salary of the New Role?",
+  "Which Department Does This Role Belong To?",
+];
+
+const [addNewRole, addNewSalary, whichDepartment] = createRole;
+
 function init() {
   console.log(
     `
@@ -76,7 +76,10 @@ function init() {
         '======================================================'
     `
   );
+  cmsMenu();
+}
 
+function cmsMenu() {
   inquirer
     .prompt([
       {
@@ -162,24 +165,6 @@ function init() {
               updateEmployee(data);
             });
           return;
-        case "Update Employee Role":
-          inquirer
-            .prompt([
-              {
-                type: "input",
-                message: employeeName,
-                name: "employeeName",
-              },
-              {
-                type: "input",
-                message: employeeRole,
-                name: "role",
-              },
-            ])
-            .then((data) => {
-              updateRole(data);
-            });
-          return;
         case "View All Roles":
           viewRoles();
           return;
@@ -190,6 +175,11 @@ function init() {
                 type: "input",
                 message: addNewRole,
                 name: "newRole",
+              },
+              {
+                type: "input",
+                message: addNewSalary,
+                name: "newSalary",
               },
               {
                 type: "input",

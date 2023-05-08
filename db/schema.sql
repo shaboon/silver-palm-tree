@@ -18,7 +18,7 @@ CREATE TABLE role (
 );
 
 CREATE TABLE employee (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT,
@@ -28,3 +28,7 @@ CREATE TABLE employee (
     ON DELETE SET NULL,
     FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
+
+SELECT * FROM department;
+SELECT * FROM role;
+SELECT * FROM employee;
