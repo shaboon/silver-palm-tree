@@ -103,7 +103,8 @@ function cmsMenu() {
       switch (data.menu) {
         case "View All Employees":
           viewAllEmployees();
-          return;
+          cmsMenu();
+          break;
         case "Add Employee":
           inquirer
             .prompt([
@@ -130,8 +131,9 @@ function cmsMenu() {
             ])
             .then((data) => {
               addEmployee(data);
+              cmsMenu();
             });
-          return;
+          break;
         case "Update Employee":
           inquirer
             .prompt([
@@ -163,14 +165,17 @@ function cmsMenu() {
             ])
             .then((data) => {
               updateEmployee(data);
+              cmsMenu();
             });
-          return;
+          break;
         case "View All Roles":
           viewRoles();
-          return;
+          cmsMenu();
+          break;
         case "Add Role":
           addRole();
-          return;
+          cmsMenu();
+          break;
         case "Update Role":
           inquirer
             .prompt([
@@ -192,11 +197,13 @@ function cmsMenu() {
             ])
             .then((data) => {
               updateRole(data);
+              cmsMenu();
             });
-          return;
+          break;
         case "View All Departments":
           viewDepartments();
-          return;
+          cmsMenu();
+          break;
         case "Add Department":
           inquirer
             .prompt([
@@ -208,8 +215,9 @@ function cmsMenu() {
             ])
             .then((data) => {
               addDepartment(data);
+              cmsMenu();
             });
-          return;
+          break;
         default:
           console.log("Quitting");
           return process.exit(0);
