@@ -54,11 +54,12 @@ function updateEmployee(data) {
   connection.query(
     `
       UPDATE employee
-      SET first_name = "${firstName}", last_name = "${lastName}", 
-      manager_id = ${manager_id}, 
+      SET first_name = "${firstName}",
+      last_name = "${lastName}",
+      manager_id = ${manager_id},
       role_id = ${role}
       
-      WHERE id = ${id}`,
+      WHERE id = ${id};`,
     function (err, res) {
       if (err) throw err;
       console.log(`Employee: ${firstName} updated, to role: ${role}`);
