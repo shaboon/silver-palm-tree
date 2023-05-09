@@ -45,14 +45,6 @@ const createRole = [
 
 const [addNewRole, addNewSalary, whichDepartment] = createRole;
 
-const updateARole = [
-  "What is the Updated Title of the Role?",
-  "What is the Updated Salary of the Role?",
-  "Which Department Does This Role Belong To?",
-];
-
-const [updatedRole, updateSalary, updateDepartment] = updateARole;
-
 const newDepartment = ["What is the Name of the New Department?"];
 
 function init() {
@@ -92,7 +84,6 @@ function cmsMenu() {
           "Update Employee",
           "View All Roles",
           "Add Role",
-          "Update Role",
           "View All Departments",
           "Add Department",
           "Quit",
@@ -173,30 +164,26 @@ function cmsMenu() {
           cmsMenu();
           break;
         case "Add Role":
-          addRole();
-          cmsMenu();
-          break;
-        case "Update Role":
           inquirer
             .prompt([
               {
                 type: "input",
-                message: updatedRole,
+                message: addNewRole,
                 name: "newRole",
               },
               {
                 type: "input",
-                message: updateSalary,
+                message: addNewSalary,
                 name: "newSalary",
               },
               {
                 type: "input",
-                message: updateDepartment,
+                message: whichDepartment,
                 name: "chooseDepartment",
               },
             ])
             .then((data) => {
-              updateRole(data);
+              addRole(data);
               cmsMenu();
             });
           break;

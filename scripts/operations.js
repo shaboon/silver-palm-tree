@@ -77,6 +77,7 @@ function viewRoles() {
     LEFT JOIN department ON role.department_id = department.id;
     `,
     function (err, res) {
+      console.log("\n");
       console.table(res);
     }
   );
@@ -103,6 +104,7 @@ function addRole(data) {
 }
 
 function updateRole(data) {
+  const id = data.targetRole;
   const updatedTitle = data.updatedTitle;
   const updatedSalary = data.updatedSalary;
   const updatedDepartment = data.updatedDepartment;
@@ -124,6 +126,7 @@ function updateRole(data) {
 
 function viewDepartments() {
   connection.query("SELECT * FROM department", function (err, res) {
+    console.log("\n");
     console.table(res);
   });
 }
