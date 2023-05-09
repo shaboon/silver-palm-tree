@@ -25,6 +25,7 @@ Pull Repository to Local Drive - Command Line Application
 
 Application Link:\
 https://github.com/shaboon/silver-palm-tree.git
+
 Tutorial Video:\
 https://drive.google.com/file/d/1N5UDdqcOgv6nH7_8Gd388HUM7BJvXcR1/view?usp=sharing
 
